@@ -1,0 +1,20 @@
+<nav class="navbar navbar-dark bg-primary">
+  <h1 class="display-4">Stock Trader (Default)</h1>
+
+  <div style="display: flex;align-items: center">
+      <div style="width: 300px;font-size: 18px; font-weight: bold;">{{equity.symbol}} shares {{equity.shares}}</div>
+      <button [disabled]="!(shares && shares > 0)" class="btn btn-secondary mr-2" (click)="trade()">Trade</button>
+      <input [(ngModel)]="shares" class="form-control my-2" type="number" placeholder="Number of Shares">
+  </div>
+</nav>
+
+<app-ticker style="margin: 2px"></app-ticker>
+
+<div class="row">
+  <div class="col">
+    <app-cost-basis [equity]="equity"></app-cost-basis>
+  </div>
+  <div class="col">
+    <app-chart [equity]="equity" (order)="orderPlaced($event)"></app-chart>
+  </div>
+</div>
