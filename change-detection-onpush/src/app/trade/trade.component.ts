@@ -7,7 +7,7 @@ import { AppService } from '../app.service';
   selector: 'app-trade',
   templateUrl: './trade.component.html',
   styleUrls: ['./trade.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TradeComponent implements OnInit, DoCheck {
 
