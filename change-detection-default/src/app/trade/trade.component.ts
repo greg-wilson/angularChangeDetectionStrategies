@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Equity } from '../equity';
 import { Order } from '../order';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-trade',
@@ -18,12 +19,13 @@ export class TradeComponent implements OnInit, DoCheck {
 
   private shares: number;
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
   }
 
   public ngDoCheck(): void {
+    this.appService.incrementcomponentChanges();
     console.log('ngDoCheck EchoComponent Component');
   }
 

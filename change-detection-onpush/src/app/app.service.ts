@@ -4,23 +4,21 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AppService implements OnDestroy {
+export class AppService {
 
-  private logDoChangeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private componentChanges = 0;
 
-  private logDoChange$ = this.logDoChangeSubject.asObservable();
+  private omponentChangeSubject = new BehaviorSubject<number>(0);
+
+  private componentChanges$ = this.omponentChangeSubject.asObservable();
 
   constructor() { }
 
-  getLogDoChange(): Observable<boolean> {
-    return this.logDoChange$;
+  public getComponentChangesObservable(): Observable<number> {
+    return this.componentChanges$;
   }
 
-  setLogDoChange(value: boolean): void {
-    this.logDoChangeSubject.next(value);
-  }
-
-  ngOnDestroy() {
-    this.logDoChangeSubject.complete();
+  public incrementcomponentChanges() {
+    this.omponentChangeSubject.next(++this.componentChanges);
   }
 }

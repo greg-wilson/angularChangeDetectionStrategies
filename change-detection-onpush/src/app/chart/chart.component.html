@@ -14,7 +14,7 @@
             <app-delta [equity]="equity"></app-delta>
         </div>
         <div class="col">
-            <app-trade [equity]="equity"></app-trade>
+                <app-trade [equity]="equity" (order)="orderPlaced($event)"></app-trade>
         </div>
     </div>
 </div>

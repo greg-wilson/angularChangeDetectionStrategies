@@ -3,6 +3,7 @@ import {
   Input, DoCheck
 } from '@angular/core';
 import { Equity } from '../equity';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-details',
@@ -15,9 +16,10 @@ export class DetailsComponent implements DoCheck {
   @Input()
   equity: Equity;
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   public ngDoCheck(): void {
+    this.appService.incrementcomponentChanges();
     console.log('ngDoCheck Details Component');
   }
 

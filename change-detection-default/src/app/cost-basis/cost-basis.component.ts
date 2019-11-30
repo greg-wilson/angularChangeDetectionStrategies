@@ -1,5 +1,6 @@
 import { Component, OnInit, DoCheck, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, Input } from '@angular/core';
 import { Equity } from '../equity';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-cost-basis',
@@ -14,7 +15,7 @@ export class CostBasisComponent implements OnInit, AfterViewInit, DoCheck {
 
   private attachedState = 'attached';
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -35,6 +36,7 @@ export class CostBasisComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   public ngDoCheck(): void {
+    this.appService.incrementcomponentChanges();
     console.log('ngDoCheck CostBasis Component');
   }
 

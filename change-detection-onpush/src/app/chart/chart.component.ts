@@ -1,8 +1,10 @@
 import {
   Component, DoCheck, ChangeDetectionStrategy,
-  Input, ElementRef, NgZone, AfterViewInit
+  Input, ElementRef, NgZone, AfterViewInit, Output, EventEmitter
 } from '@angular/core';
 import { Equity } from '../equity';
+import { AppService } from '../app.service';
+import { Order } from '../order';
 
 @Component({
   selector: 'app-chart',
@@ -14,6 +16,9 @@ export class ChartComponent implements AfterViewInit, DoCheck {
 
   @Input()
   equity: Equity;
+
+  @Output()
+  order = new EventEmitter<Order>();
 
   inChart: boolean;
 
@@ -31,7 +36,7 @@ export class ChartComponent implements AfterViewInit, DoCheck {
     }
   }
 
-  constructor(private elementRef: ElementRef, private zone: NgZone) { }
+  constructor(private appService: AppService, private elementRef: ElementRef, private zone: NgZone) { }
 
   ngAfterViewInit() {
     this.zone.runOutsideAngular(() => {
@@ -45,7 +50,12 @@ export class ChartComponent implements AfterViewInit, DoCheck {
   }
 
   public ngDoCheck(): void {
+    this.appService.incrementcomponentChanges();
     console.log('ngDoCheck Chart Component');
+  }
+
+  orderPlaced(newOrder: Order) {
+    this.order.emit(newOrder);
   }
 
   buttonClick(): void {

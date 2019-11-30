@@ -1,5 +1,6 @@
 import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Equity } from '../equity';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-delta',
@@ -12,12 +13,13 @@ export class DeltaComponent implements OnInit, DoCheck {
   @Input()
   equity: Equity;
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
   }
 
   public ngDoCheck(): void {
+    this.appService.incrementcomponentChanges();
     console.log('ngDoCheck DeltaComponent Component');
   }
 

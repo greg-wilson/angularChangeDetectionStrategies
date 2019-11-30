@@ -1,6 +1,7 @@
 import { Component, DoCheck, ChangeDetectionStrategy, Input, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
 import { Equity } from '../equity';
 import { Order } from '../order';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-chart',
@@ -29,7 +30,7 @@ export class ChartComponent implements DoCheck {
     }
   }
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   getSymbol() {
     console.log('method getName() called');
@@ -37,6 +38,7 @@ export class ChartComponent implements DoCheck {
   }
 
   public ngDoCheck(): void {
+    this.appService.incrementcomponentChanges();
     console.log('ngDoCheck Chart Component');
   }
 

@@ -12,7 +12,9 @@ import { Order } from './order';
 export class AppComponent implements DoCheck {
   title = 'change-detection';
 
-  public shares: number;
+  componentChanges$ = this.appService.getComponentChangesObservable();
+
+  shares: number;
 
   equity = new Equity('Microsoft', 'MSFT', 100.00, 1000, 10, 50.00);
 
@@ -20,6 +22,7 @@ export class AppComponent implements DoCheck {
   }
 
   ngDoCheck(): void {
+    this.appService.incrementcomponentChanges();
     console.log('ngDoCheck APP Component ' + new Date().toLocaleTimeString());
   }
 
@@ -27,7 +30,7 @@ export class AppComponent implements DoCheck {
     console.log('App Component Click');
   }
 
-  orderPlaced(newOrder: Order){
+  orderPlaced(newOrder: Order) {
     this.equity.shares += newOrder.shares;
   }
 
