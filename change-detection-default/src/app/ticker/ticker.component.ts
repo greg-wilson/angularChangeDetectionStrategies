@@ -7,7 +7,7 @@ import { AppService } from '../app.service';
   templateUrl: './ticker.component.html',
   styleUrls: ['./ticker.component.scss']
 })
-export class TickerComponent implements OnInit {
+export class TickerComponent {
 
   wsUrl = 'wss://connect.websocket.in/griptide?room_id=2019';
 
@@ -17,7 +17,7 @@ export class TickerComponent implements OnInit {
 
   constructor(private appService: AppService) { }
 
-  ngOnInit() {
+  start() {
     this.receiver = new WebSocket(this.wsUrl);
     this.receiver.onmessage = (ev: MessageEvent) => {
       const data = JSON.parse(ev.data);

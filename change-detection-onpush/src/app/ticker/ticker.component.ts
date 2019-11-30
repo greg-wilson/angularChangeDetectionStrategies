@@ -7,7 +7,7 @@ import { isArray } from 'util';
   styleUrls: ['./ticker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TickerComponent implements OnInit {
+export class TickerComponent {
 
   wsUrl = 'wss://connect.websocket.in/griptide?room_id=2019';
 
@@ -17,7 +17,7 @@ export class TickerComponent implements OnInit {
 
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit() {
+  start() {
 
     // throttle change detection with interval and ChangeDetectorRef
     setInterval(() => { this.changeDetectorRef.detectChanges(); }, 5000);
