@@ -20,10 +20,10 @@ import { DetailsComponent } from './details/details.component';
 import { CostBasisComponent } from './cost-basis/cost-basis.component';
 import { ChartComponent } from './chart/chart.component';
 import { DeltaComponent } from './delta/delta.component';
-import { EchoComponent } from './echo/echo.component';
 import { NamePipe } from './name.pipe';
 import { TickerComponent } from './ticker/ticker.component';
 import { ValuePipe } from './value.pipe';
+import { TradeComponent } from './trade/trade.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +33,9 @@ import { ValuePipe } from './value.pipe';
     CostBasisComponent,
     ChartComponent,
     DeltaComponent,
-    EchoComponent,
     NamePipe,
     TickerComponent,
+    TradeComponent,
     ValuePipe
   ],
   imports: [
