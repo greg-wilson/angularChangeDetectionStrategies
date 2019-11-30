@@ -15,3 +15,5 @@ change-detection-onpush/node_modules/*
 change-detection-default/dist/*
 change-detection-onpush/dist/*
 change-detection-onpush/src/app/.DS_Store
+sender/dist/*
+sender/node_modules/*
