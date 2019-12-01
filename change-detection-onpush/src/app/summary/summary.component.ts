@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, DoCheck, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
 
@@ -8,15 +8,12 @@ import { AppService } from '../app.service';
   styleUrls: ['./summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SummaryComponent implements OnInit, DoCheck {
+export class SummaryComponent implements DoCheck {
 
   @Input()
   equity: Equity;
 
   constructor(private appService: AppService) { }
-
-  ngOnInit() {
-  }
 
   public ngDoCheck(): void {
     this.appService.incrementcomponentChanges();
@@ -26,5 +23,4 @@ export class SummaryComponent implements OnInit, DoCheck {
   buttonClick(): void {
     console.log('Summary Click');
   }
-
 }

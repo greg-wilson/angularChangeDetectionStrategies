@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, Input } from '@angular/core';
+import { Component, DoCheck, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
 
@@ -8,32 +8,12 @@ import { AppService } from '../app.service';
   styleUrls: ['./cost-basis.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class CostBasisComponent implements OnInit, AfterViewInit, DoCheck {
+export class CostBasisComponent implements DoCheck {
 
   @Input()
   equity: Equity;
 
-  private attachedState = 'attached';
-
-  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
-
-  ngOnInit() {
-
-  }
-
-  ngAfterViewInit() {
-  }
-
-  detach() {
-    this.attachedState = 'detached';
-    this.changeDetectorRef.detach();
-    this.changeDetectorRef.markForCheck();
-  }
-
-  reattach() {
-    this.attachedState = 'attached';
-    this.changeDetectorRef.reattach();
-  }
+  constructor(private appService: AppService) { }
 
   public ngDoCheck(): void {
     this.appService.incrementcomponentChanges();

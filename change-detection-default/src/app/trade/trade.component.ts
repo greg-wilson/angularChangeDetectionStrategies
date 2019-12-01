@@ -1,4 +1,6 @@
-import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, DoCheck,
+  ChangeDetectionStrategy, Input,
+  Output, EventEmitter } from '@angular/core';
 import { Equity } from '../equity';
 import { Order } from '../order';
 import { AppService } from '../app.service';
@@ -9,7 +11,7 @@ import { AppService } from '../app.service';
   styleUrls: ['./trade.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class TradeComponent implements OnInit, DoCheck {
+export class TradeComponent implements DoCheck {
 
   @Input()
   equity: Equity;
@@ -21,12 +23,9 @@ export class TradeComponent implements OnInit, DoCheck {
 
   constructor(private appService: AppService) { }
 
-  ngOnInit() {
-  }
-
   public ngDoCheck(): void {
     this.appService.incrementcomponentChanges();
-    console.log('ngDoCheck EchoComponent Component');
+    console.log('ngDoCheck Trade Component');
   }
 
   buttonClick(): void {

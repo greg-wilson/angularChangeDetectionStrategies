@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, AfterViewInit, DoCheck } from '@angular/core';
+import { Component, ChangeDetectionStrategy, DoCheck } from '@angular/core';
 import { AppService } from './app.service';
 import { Equity } from './equity';
 import { Order } from './order';

@@ -1,0 +1,7 @@
+<div class="card m-1">
+    <div *ngIf="equity$ | async as equity" class="card-body">
+        <h4 class="card-title">Summary - {{ equity | name }}</h4>
+        <p>{{equity.name}} {{equity.symbol}} shares: {{equity.shares}}</p>
+        <button class="btn btn-primary m-1" (click)="buttonClick()">Edit</button>
+    </div>
+</div>

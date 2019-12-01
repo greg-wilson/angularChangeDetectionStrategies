@@ -1,4 +1,6 @@
-import { Component, DoCheck, ChangeDetectionStrategy, Input, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, DoCheck,
+  ChangeDetectionStrategy, Input,
+  HostListener, Output, EventEmitter } from '@angular/core';
 import { Equity } from '../equity';
 import { Order } from '../order';
 import { AppService } from '../app.service';
@@ -49,8 +51,4 @@ export class ChartComponent implements DoCheck {
   buttonClick(): void {
     console.log('Chart Click');
   }
-
-
-
-
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { isArray } from 'util';
 import { AppService } from '../app.service';
 
 @Component({

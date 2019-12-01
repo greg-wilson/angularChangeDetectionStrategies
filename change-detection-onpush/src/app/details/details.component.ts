@@ -26,8 +26,4 @@ export class DetailsComponent implements DoCheck {
   buttonClick(): void {
     console.log('Details Click');
   }
-
-  getValue(): number {
-    return this.equity.price * this.equity.shares;
-  }
 }
