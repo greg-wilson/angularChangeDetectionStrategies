@@ -1,6 +1,6 @@
 import {
   Component, OnInit, DoCheck, ChangeDetectionStrategy,
-  ChangeDetectorRef, AfterViewInit, Input
+  ChangeDetectorRef, AfterViewInit
 } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
@@ -15,7 +15,11 @@ export class CostBasisComponent implements AfterViewInit, DoCheck {
 
   equity: Equity;
 
-  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(
+    private appService: AppService,
+    private changeDetectorRef: ChangeDetectorRef) {
+    this.changeDetectorRef.detach();
+  }
 
   ngAfterViewInit() {
     this.changeDetectorRef.detach();

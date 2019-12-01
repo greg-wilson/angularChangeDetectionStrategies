@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
 
@@ -10,7 +10,6 @@ import { AppService } from '../app.service';
 })
 export class SummaryComponent implements AfterViewInit, DoCheck {
 
-  @Input()
   equity: Equity;
 
   constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
@@ -20,7 +19,6 @@ export class SummaryComponent implements AfterViewInit, DoCheck {
       this.equity = e;
       this.changeDetectorRef.detectChanges();
     });
-    this.changeDetectorRef.detach();
   }
 
   public ngDoCheck(): void {
