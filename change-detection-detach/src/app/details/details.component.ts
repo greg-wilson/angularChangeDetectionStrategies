@@ -1,6 +1,6 @@
 import {
   Component, ChangeDetectionStrategy,
-  Input, DoCheck
+  Input, DoCheck, ChangeDetectorRef, AfterViewInit
 } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
@@ -11,16 +11,23 @@ import { AppService } from '../app.service';
   styleUrls: ['./details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DetailsComponent implements DoCheck {
+export class DetailsComponent implements DoCheck, AfterViewInit {
 
-  @Input()
   equity: Equity;
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
 
   public ngDoCheck(): void {
     this.appService.incrementcomponentChanges();
     console.log('ngDoCheck Details Component');
+  }
+
+  ngAfterViewInit(): void {
+    this.appService.getEquity$().subscribe(e => {
+      this.equity = e;
+      this.changeDetectorRef.detectChanges();
+    });
+    this.changeDetectorRef.detach();
   }
 
   buttonClick(): void {

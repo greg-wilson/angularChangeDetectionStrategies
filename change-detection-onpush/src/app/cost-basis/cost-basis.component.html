@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h2 class="card-title">Cost Basis - {{getCostBasis() | currency}}</h2>
+        <h2 class="card-title">Cost Basis - {{equity | costBasis | currency}}</h2>
         <p class="card-text">Current Shares - <span style="font-weight: bold;">{{equity.shares}}</span></p>
         <div class="button-container">
             <button class="btn btn-primary m-1" (click)="buttonClick()">Edit</button>

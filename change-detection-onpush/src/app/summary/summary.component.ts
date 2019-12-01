@@ -24,7 +24,7 @@ export class SummaryComponent implements OnInit, DoCheck {
   }
 
   buttonClick(): void {
-    console.log('Alpha Click');
+    console.log('Summary Click');
   }
 
 }

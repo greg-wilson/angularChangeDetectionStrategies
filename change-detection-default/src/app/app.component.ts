@@ -12,6 +12,7 @@ import { Order } from './order';
 export class AppComponent implements DoCheck {
   title = 'change-detection';
 
+  componentChanges = 0;
   componentChanges$ = this.appService.getComponentChangesObservable();
 
   shares: number;
@@ -19,6 +20,7 @@ export class AppComponent implements DoCheck {
   equity = new Equity('Microsoft', 'MSFT', 100.00, 1000, 10, 50.00);
 
   constructor(public appService: AppService) {
+    this.componentChanges$.subscribe( val => console.log(val));
   }
 
   ngDoCheck(): void {

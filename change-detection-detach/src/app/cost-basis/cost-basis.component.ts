@@ -11,18 +11,18 @@ import { AppService } from '../app.service';
   styleUrls: ['./cost-basis.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CostBasisComponent implements OnInit, AfterViewInit, DoCheck {
+export class CostBasisComponent implements AfterViewInit, DoCheck {
 
-  @Input()
   equity: Equity;
 
   constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit() {
-
-  }
-
   ngAfterViewInit() {
+    this.changeDetectorRef.detach();
+    this.appService.getEquity$().subscribe((e: Equity) => {
+      this.equity = e;
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   public ngDoCheck(): void {

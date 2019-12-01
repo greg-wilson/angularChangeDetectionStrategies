@@ -1,6 +1,7 @@
 import {
   Component, DoCheck, ChangeDetectionStrategy,
-  Input, ElementRef, NgZone, AfterViewInit, Output, EventEmitter
+  Input, ElementRef, NgZone, AfterViewInit, Output,
+  EventEmitter, ChangeDetectorRef
 } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
@@ -27,21 +28,32 @@ export class ChartComponent implements AfterViewInit, DoCheck {
     if (mouseEvent.clientY > 250 && mouseEvent.clientY < 300 && this.inChart !== true) {
       this.zone.run(() => {
         this.inChart = true;
+        this.changeDetectorRef.detectChanges();
       });
     }
     if (mouseEvent.clientY > 300 && this.inChart !== false) {
       this.zone.run(() => {
         this.inChart = false;
+        this.changeDetectorRef.detectChanges();
       });
     }
   }
 
-  constructor(private appService: AppService, private elementRef: ElementRef, private zone: NgZone) { }
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private appService: AppService,
+    private elementRef: ElementRef,
+    private zone: NgZone) { }
 
   ngAfterViewInit() {
+    this.appService.getEquity$().subscribe(e => {
+      this.equity = e;
+    });
+    this.changeDetectorRef.detach();
     this.zone.runOutsideAngular(() => {
       this.elementRef.nativeElement.addEventListener('mousemove', (mouseEvent: MouseEvent) => this.onMouseMove(mouseEvent));
     });
+
   }
 
   getSymbol() {

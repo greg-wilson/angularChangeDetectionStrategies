@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, AfterViewInit, DoCheck } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { AppService } from './app.service';
 import { Equity } from './equity';
 import { Order } from './order';
@@ -9,16 +9,33 @@ import { Order } from './order';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements DoCheck {
+export class AppComponent implements AfterViewInit, DoCheck {
   title = 'change-detection';
 
-  componentChanges$ = this.appService.getComponentChangesObservable();
+  componentChanges = 0;
+
+  componentChanges$ = this.appService.getComponentChanges$();
 
   shares: number;
 
   equity = new Equity('Microsoft', 'MSFT', 100.00, 1000, 10, 50.00);
 
-  constructor(public appService: AppService) {
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    public appService: AppService) {
+
+  }
+
+  ngAfterViewInit() {
+    this.componentChanges$.subscribe(val => console.log(val));
+
+    this.appService.getEquity$().subscribe(e => {
+      this.equity = e;
+      // this.changeDetectorRef.detectChanges();
+    });
+
+    this.appService.getOrder$().subscribe(o => this.orderPlaced(o));
+    // this.changeDetectorRef.detach();
   }
 
   ngDoCheck(): void {
@@ -26,20 +43,26 @@ export class AppComponent implements DoCheck {
     console.log('ngDoCheck APP Component ' + new Date().toLocaleTimeString());
   }
 
+  onKey() {
+    // this.changeDetectorRef.detectChanges();
+  }
   buttonClick(): void {
     console.log('App Component Click');
   }
 
   orderPlaced(newOrder: Order) {
-    if (!this.shares) {
-      this.shares = 0;
+    if (newOrder) {
+      if (!this.shares) {
+        this.shares = 0;
+      }
+      this.shares += newOrder.shares;
+      this.trade();
     }
-    this.shares += newOrder.shares;
-    this.trade();
   }
 
   trade() {
     const shares = this.equity.shares += this.shares;
     this.equity = new Equity('Microsoft', 'MSFT', 100.00, shares, 10, 50.00);
+    this.appService.setEquity(this.equity);
   }
 }

@@ -2,7 +2,7 @@
     <div class="card-body">
         <h4 class="card-title">Summary - {{ equity | name }}</h4>
         <!-- <p>Cache template methods with Pipes</p> -->
-        <p>{{equity.name}} {{equity.symbol}} shares: {{equity.shares}}</p>
+        <p *ngIf="equity">{{equity.name}} {{equity.symbol}} shares: {{equity.shares}}</p>
         <button class="btn btn-primary m-1" (click)="buttonClick()">Edit</button>
     </div>
 </div>

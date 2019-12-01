@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { isArray } from 'util';
 
 @Component({
@@ -7,7 +7,7 @@ import { isArray } from 'util';
   styleUrls: ['./ticker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TickerComponent {
+export class TickerComponent implements AfterViewInit {
 
   wsUrl = 'wss://connect.websocket.in/griptide?room_id=2019';
 
@@ -16,6 +16,10 @@ export class TickerComponent {
   symbolData: any;
 
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
+
+  ngAfterViewInit() {
+    this.changeDetectorRef.detach();
+  }
 
   start() {
 

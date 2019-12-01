@@ -1,12 +1,13 @@
 <div class="card m-1">
     <div class="card-body">
         <h2 class="card-title">Trade </h2>
-        <p>Equity Value {{getValue() | currency}}</p>
+        <p>Equity Value {{equity | value | currency}}</p>
 
         <div style="display: flex;">
-            <input [(ngModel)]="shares" class="form-control m-1" type="number" placeholder="Shares">
-            <button [disabled]="!(shares && shares > 0)" class="btn btn-primary m-1"
+            <input (keyUp)="onKey($event)" [(ngModel)]="shares" class="form-control m-1" type="number" placeholder="Shares">
+            <button  class="btn btn-primary m-1"
                 (click)="buttonClick()">Trade</button>
         </div>
+        <!-- [disabled]="!(shares && shares > 0)" -->
     </div>
 </div>

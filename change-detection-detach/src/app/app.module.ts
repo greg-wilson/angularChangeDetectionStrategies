@@ -24,6 +24,7 @@ import { NamePipe } from './name.pipe';
 import { TickerComponent } from './ticker/ticker.component';
 import { ValuePipe } from './value.pipe';
 import { TradeComponent } from './trade/trade.component';
+import { CostBasisPipe } from './cost-basis.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TradeComponent } from './trade/trade.component';
     NamePipe,
     TickerComponent,
     TradeComponent,
-    ValuePipe
+    ValuePipe,
+    CostBasisPipe
   ],
   imports: [
     BrowserModule,

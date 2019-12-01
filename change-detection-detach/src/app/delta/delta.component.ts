@@ -1,4 +1,9 @@
-import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component, DoCheck,
+  ChangeDetectionStrategy,
+  Input, ChangeDetectorRef,
+  AfterViewInit
+} from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
 
@@ -8,26 +13,26 @@ import { AppService } from '../app.service';
   styleUrls: ['./delta.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DeltaComponent implements OnInit, DoCheck {
+export class DeltaComponent implements AfterViewInit, DoCheck {
 
-  @Input()
   equity: Equity;
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef, ) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.appService.getEquity$().subscribe( e => {
+      this.equity = e;
+      this.changeDetectorRef.detectChanges();
+    });
+    this.changeDetectorRef.detach();
   }
 
   public ngDoCheck(): void {
     this.appService.incrementcomponentChanges();
-    console.log('ngDoCheck DeltaComponent Component');
+    console.log('ngDoCheck DELTA Component');
   }
 
   buttonClick(): void {
     console.log('Delta Click');
-  }
-
-  getValue(): number {
-    return this.equity.price * this.equity.shares;
   }
 }

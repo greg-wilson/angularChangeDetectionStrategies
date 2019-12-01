@@ -8,7 +8,11 @@ export class NamePipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
     const s = value as Equity;
-    return s.symbol;
+    if (s) {
+      return s.symbol;
+    } else {
+      return '';
+    }
   }
 
 }

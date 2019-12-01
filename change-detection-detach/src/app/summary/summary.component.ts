@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
 
@@ -8,14 +8,19 @@ import { AppService } from '../app.service';
   styleUrls: ['./summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SummaryComponent implements OnInit, DoCheck {
+export class SummaryComponent implements AfterViewInit, DoCheck {
 
   @Input()
   equity: Equity;
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    this.appService.getEquity$().subscribe( e => {
+      this.equity = e;
+      this.changeDetectorRef.detectChanges();
+    });
+    this.changeDetectorRef.detach();
   }
 
   public ngDoCheck(): void {
@@ -24,7 +29,7 @@ export class SummaryComponent implements OnInit, DoCheck {
   }
 
   buttonClick(): void {
-    console.log('Alpha Click');
+    console.log('Summary Click');
   }
 
 }

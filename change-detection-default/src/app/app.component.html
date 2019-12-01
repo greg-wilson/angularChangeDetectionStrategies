@@ -5,9 +5,6 @@
       <div style="width: 300px;font-size: 18px; font-weight: bold;">{{equity.symbol}} shares {{equity.shares}}</div>
       <button [disabled]="!(shares && shares > 0)" class="btn btn-secondary mr-2" (click)="trade()">Trade</button>
       <input [(ngModel)]="shares" class="form-control my-2" type="number" placeholder="Number of Shares">
-      <p  style="width:200px; padding-left: 5px" *ngIf="componentChanges$ | async as componentChanges">
-        Changes: {{componentChanges}}
-      </p>
   </div>
 </nav>
 

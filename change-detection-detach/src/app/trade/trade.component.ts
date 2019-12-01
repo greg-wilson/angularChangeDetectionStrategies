@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, DoCheck, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { Equity } from '../equity';
 import { Order } from '../order';
 import { AppService } from '../app.service';
@@ -9,19 +9,20 @@ import { AppService } from '../app.service';
   styleUrls: ['./trade.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TradeComponent implements OnInit, DoCheck {
+export class TradeComponent implements AfterViewInit, DoCheck {
 
-  @Input()
   equity: Equity;
-
-  @Output()
-  order = new EventEmitter<Order>();
 
   private shares: number;
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.appService.getEquity$().subscribe(e => {
+      this.equity = e;
+      this.changeDetectorRef.detectChanges();
+    });
+    this.changeDetectorRef.detach();
   }
 
   public ngDoCheck(): void {
@@ -30,11 +31,19 @@ export class TradeComponent implements OnInit, DoCheck {
   }
 
   buttonClick(): void {
-    this.order.emit(new Order('MSFT', this.shares));
+    this.appService.placeOrder(new Order('MSFT', this.shares));
+  }
+
+  onKey(eventData: any) {
+    this.changeDetectorRef.detectChanges();
   }
 
   getValue(): number {
     console.log('!!! getValue() Called');
-    return this.equity.price * this.equity.shares;
+    if (this.equity) {
+      return this.equity.price * this.equity.shares;
+    } else {
+      return 0;
+    }
   }
 }
