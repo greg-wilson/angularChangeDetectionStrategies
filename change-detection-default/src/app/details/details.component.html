@@ -1,6 +1,6 @@
 <div class="card m-1">
     <div class="card-body">
-        <h4 class="card-title">Details - {{ equity | name }}</h4>
+        <h4 class="card-title">Details - {{ equity.symbol }}</h4>
         <p>Equity Value {{getValue() | currency}}</p>
         <button class="btn btn-primary m-1" (click)="buttonClick()">Edit</button>
     </div>

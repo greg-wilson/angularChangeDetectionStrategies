@@ -1,6 +1,6 @@
 <div class="card m-1">
     <div class="card-body">
-        <h4 class="card-title">Summary - {{ equity | name }}</h4>
+        <h4 class="card-title">Summary - {{ equity.symbol }}</h4>
         <!-- <p>Cache template methods with Pipes</p> -->
         <p>{{equity.name}} {{equity.symbol}} shares: {{equity.shares}}</p>
         <button class="btn btn-primary m-1" (click)="buttonClick()">Edit</button>

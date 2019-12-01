@@ -21,7 +21,6 @@ import { CostBasisComponent } from './cost-basis/cost-basis.component';
 import { ChartComponent } from './chart/chart.component';
 import { DeltaComponent } from './delta/delta.component';
 import { TradeComponent } from './trade/trade.component';
-import { NamePipe } from './name.pipe';
 import { TickerComponent } from './ticker/ticker.component';
 
 @NgModule({
@@ -33,7 +32,6 @@ import { TickerComponent } from './ticker/ticker.component';
     ChartComponent,
     DeltaComponent,
     TradeComponent,
-    NamePipe,
     TickerComponent
   ],
   imports: [
