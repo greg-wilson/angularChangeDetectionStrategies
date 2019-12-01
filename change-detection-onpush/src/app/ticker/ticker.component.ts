@@ -19,13 +19,14 @@ export class TickerComponent {
   start() {
 
     // throttle change detection with interval and ChangeDetectorRef
-    setInterval(() => { this.changeDetectorRef.detectChanges(); }, 5000);
+    // setInterval(() => { this.changeDetectorRef.detectChanges(); }, 5000);
 
     this.receiver = new WebSocket(this.wsUrl);
     this.receiver.onmessage = (ev: MessageEvent) => {
       const data = JSON.parse(ev.data);
       if (data && Array.isArray(data)) {
         this.symbolData = data;
+        this.changeDetectorRef.detectChanges();
       }
     };
 

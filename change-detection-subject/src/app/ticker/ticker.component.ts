@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { isArray } from 'util';
 
 @Component({
@@ -7,7 +7,7 @@ import { isArray } from 'util';
   styleUrls: ['./ticker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TickerComponent implements AfterViewInit {
+export class TickerComponent {
 
   wsUrl = 'wss://connect.websocket.in/griptide?room_id=2019';
 
@@ -17,20 +17,17 @@ export class TickerComponent implements AfterViewInit {
 
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngAfterViewInit() {
-    this.changeDetectorRef.detach();
-  }
-
   start() {
 
     // throttle change detection with interval and ChangeDetectorRef
-    setInterval(() => { this.changeDetectorRef.detectChanges(); }, 5000);
+    // setInterval(() => { this.changeDetectorRef.detectChanges(); }, 5000);
 
     this.receiver = new WebSocket(this.wsUrl);
     this.receiver.onmessage = (ev: MessageEvent) => {
       const data = JSON.parse(ev.data);
       if (data && Array.isArray(data)) {
         this.symbolData = data;
+        this.changeDetectorRef.detectChanges();
       }
     };
 
