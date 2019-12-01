@@ -13,7 +13,7 @@ export class AppComponent implements DoCheck {
   title = 'change-detection';
 
   componentChanges = 0;
-  componentChanges$ = this.appService.getComponentChangesObservable();
+  componentChanges$ = this.appService.getComponentChanges$();
 
   shares: number;
 

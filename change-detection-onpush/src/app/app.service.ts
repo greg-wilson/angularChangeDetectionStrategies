@@ -14,7 +14,7 @@ export class AppService {
 
   constructor() { }
 
-  public getComponentChangesObservable(): Observable<number> {
+  public getComponentChanges$(): Observable<number> {
     return this.componentChanges$;
   }
 

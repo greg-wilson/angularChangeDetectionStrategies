@@ -12,7 +12,7 @@ import { Order } from './order';
 export class AppComponent implements DoCheck {
   title = 'change-detection';
 
-  componentChanges$ = this.appService.getComponentChangesObservable();
+  componentChanges$ = this.appService.getComponentChanges$();
 
   shares: number;
 
