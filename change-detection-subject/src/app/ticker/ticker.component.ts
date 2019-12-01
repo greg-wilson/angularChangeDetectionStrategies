@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { isArray } from 'util';
 
 @Component({
   selector: 'app-ticker',
