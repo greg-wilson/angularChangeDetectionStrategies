@@ -37,6 +37,7 @@ export class AppComponent implements DoCheck {
   }
 
   trade() {
+    // changing the value of the shares property works with default change detection
     this.equity.shares += this.shares;
   }
 }

@@ -40,6 +40,7 @@ export class AppComponent implements DoCheck {
   }
 
   trade() {
+    // with OnPush change detection, changes are detected when the reference changes
     const shares = this.equity.shares += this.shares;
     this.equity = new Equity('Microsoft', 'MSFT', 100.00, shares, 10, 50.00);
   }

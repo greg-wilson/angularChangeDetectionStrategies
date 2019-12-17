@@ -54,6 +54,7 @@ export class AppComponent implements AfterViewInit, DoCheck {
   }
 
   trade() {
+    // use a service to orchestrate changes to data between components
     const shares = this.equity.shares += this.shares;
     this.equity = new Equity('Microsoft', 'MSFT', 100.00, shares, 10, 50.00);
     this.appService.setEquity(this.equity);
