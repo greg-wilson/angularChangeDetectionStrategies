@@ -26,6 +26,8 @@ export class TickerComponent {
       const data = JSON.parse(ev.data);
       if (data && Array.isArray(data)) {
         this.symbolData = data;
+        // #CODE nothing is telling the change detector to run. With each data update
+        // we tell angluar to detect changes
         this.changeDetectorRef.detectChanges();
       }
     };

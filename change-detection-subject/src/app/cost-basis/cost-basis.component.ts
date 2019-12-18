@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
+import { EquityService } from '../equity.service';
 
 @Component({
   selector: 'app-cost-basis',
@@ -13,10 +14,11 @@ import { AppService } from '../app.service';
 })
 export class CostBasisComponent implements DoCheck {
 
-  equity$ = this.appService.getEquity$();
+  equity$ = this.equityService.getEquity$();
 
   constructor(
-    private appService: AppService) {
+    private appService: AppService,
+    private equityService: EquityService) {
   }
 
   public ngDoCheck(): void {

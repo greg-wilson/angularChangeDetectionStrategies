@@ -35,13 +35,13 @@ export class AppComponent implements DoCheck {
     if (!this.shares) {
       this.shares = 0;
     }
-    this.shares += newOrder.shares;
-    this.trade();
+    // #CODE with OnPush change detection, changes are detected when the reference changes
+    this.equity = new Equity('Microsoft', 'MSFT', 100.00, this.equity.shares + newOrder.shares, 10, 50.00);
   }
 
   trade() {
-    // with OnPush change detection, changes are detected when the reference changes
-    const shares = this.equity.shares += this.shares;
-    this.equity = new Equity('Microsoft', 'MSFT', 100.00, shares, 10, 50.00);
+    // #CODE with OnPush change detection, changes are detected when the reference changes
+    this.equity.shares += this.shares;
+    this.equity = new Equity('Microsoft', 'MSFT', 100.00, this.equity.shares, 10, 50.00);
   }
 }

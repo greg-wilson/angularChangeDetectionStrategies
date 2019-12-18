@@ -8,9 +8,9 @@ export class AppService {
 
   private componentChanges = 0;
 
-  private omponentChangeSubject = new BehaviorSubject<number>(0);
+  private componentChangeSubject = new BehaviorSubject<number>(0);
 
-  private componentChanges$ = this.omponentChangeSubject.asObservable();
+  private componentChanges$ = this.componentChangeSubject.asObservable();
 
   constructor() { }
 
@@ -19,6 +19,6 @@ export class AppService {
   }
 
   public incrementcomponentChanges() {
-    this.omponentChangeSubject.next(++this.componentChanges);
+    this.componentChangeSubject.next(++this.componentChanges);
   }
 }

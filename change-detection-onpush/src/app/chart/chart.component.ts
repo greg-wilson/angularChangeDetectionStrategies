@@ -32,6 +32,8 @@ export class ChartComponent implements AfterViewInit, DoCheck {
     // console.log(mouseEvent.offsetX + ' ' + mouseEvent.clientY);
     if (mouseEvent.clientY > 250 && mouseEvent.clientY < 300 && this.inChart !== true) {
       this.inChart = true;
+      // #CODE when the style is updated tell angular to run change detection
+      // so that color is updated in the view
       this.changeDetectorRef.detectChanges();
     }
     if (mouseEvent.clientY > 300 && this.inChart !== false) {
@@ -41,6 +43,7 @@ export class ChartComponent implements AfterViewInit, DoCheck {
   }
 
   ngAfterViewInit() {
+    // #CODE add an event listern outside of angular
     this.zone.runOutsideAngular(() => {
       this.elementRef.nativeElement.addEventListener('mousemove', (mouseEvent: MouseEvent) => this.onMouseMove(mouseEvent));
     });

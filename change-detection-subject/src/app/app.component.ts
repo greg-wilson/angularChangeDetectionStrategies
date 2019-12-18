@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, AfterViewInit, DoCheck, ChangeDetec
 import { AppService } from './app.service';
 import { Equity } from './equity';
 import { Order } from './order';
+import { EquityService } from './equity.service';
 
 @Component({
   selector: 'app-root',
@@ -22,16 +23,16 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    public appService: AppService) {
+    public appService: AppService, private equityService: EquityService) {
 
   }
 
   ngAfterViewInit() {
     this.componentChanges$.subscribe(val => console.log(val));
 
-    this.appService.getEquity$().subscribe(e => this.equity = e);
+    this.equityService.getEquity$().subscribe(e => this.equity = e);
 
-    this.appService.getOrder$().subscribe(o => this.orderPlaced(o));
+    this.equityService.getOrder$().subscribe(o => this.orderPlaced(o));
   }
 
   ngDoCheck(): void {
@@ -48,15 +49,16 @@ export class AppComponent implements AfterViewInit, DoCheck {
       if (!this.shares) {
         this.shares = 0;
       }
-      this.shares += newOrder.shares;
-      this.trade();
+      // #CODE use a service to coordinate changes to data between components
+      this.equity = new Equity('Microsoft', 'MSFT', 100.00, this.equity.shares + newOrder.shares, 10, 50.00);
+      this.equityService.setEquity(this.equity);
     }
   }
 
   trade() {
-    // use a service to orchestrate changes to data between components
+    // #CODE use a service to coordinate changes to data between components
     const shares = this.equity.shares += this.shares;
     this.equity = new Equity('Microsoft', 'MSFT', 100.00, shares, 10, 50.00);
-    this.appService.setEquity(this.equity);
+    this.equityService.setEquity(this.equity);
   }
 }

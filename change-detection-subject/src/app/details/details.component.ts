@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
+import { EquityService } from '../equity.service';
 
 @Component({
   selector: 'app-details',
@@ -13,9 +14,11 @@ import { AppService } from '../app.service';
 })
 export class DetailsComponent implements DoCheck {
 
-  equity$ = this.appService.getEquity$();
+  equity$ = this.equityService.getEquity$();
 
-  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private appService: AppService,
+              private equityService: EquityService,
+              private changeDetectorRef: ChangeDetectorRef) { }
 
   public ngDoCheck(): void {
     this.appService.incrementcomponentChanges();

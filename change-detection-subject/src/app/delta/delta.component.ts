@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { Equity } from '../equity';
 import { AppService } from '../app.service';
+import { EquityService } from '../equity.service';
 
 @Component({
   selector: 'app-delta',
@@ -13,9 +14,9 @@ import { AppService } from '../app.service';
 })
 export class DeltaComponent implements DoCheck {
 
-  equity$ = this.appService.getEquity$();
+  equity$ = this.equitySerivce.getEquity$();
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private equitySerivce: EquityService) { }
 
 
   public ngDoCheck(): void {

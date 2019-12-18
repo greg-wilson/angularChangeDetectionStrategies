@@ -20,6 +20,7 @@ export class CostBasisComponent implements DoCheck {
     console.log('ngDoCheck CostBasis Component');
   }
 
+  // #CODE Template method
   getCostBasis(): number {
     console.log('!!! getCostBasis Callsed');
     let costBasis = 0;
@@ -31,6 +32,7 @@ export class CostBasisComponent implements DoCheck {
 
   buttonClick(): void {
     console.log('CostBasis Click');
+    this.equity.shares += 1000;
   }
 
 }

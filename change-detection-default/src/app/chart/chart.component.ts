@@ -21,10 +21,12 @@ export class ChartComponent implements DoCheck {
 
   inChart: boolean;
 
+  // #CODE Host listener
   @HostListener('mousemove', ['$event'])
   onMouseMove(mouseEvent: MouseEvent) {
     // console.log(mouseEvent.offsetX + ' ' + mouseEvent.clientY);
     if (mouseEvent.clientY > 250 && mouseEvent.clientY < 300 && this.inChart !== true) {
+      // #CODE style to change color of chart
       this.inChart = true;
     }
     if (mouseEvent.clientY > 300 && this.inChart !== false) {
